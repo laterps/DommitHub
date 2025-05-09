@@ -5,6 +5,30 @@
 </head>
 <body>
   <h1>Automatización de Caja</h1>
-  <button onclick="alert('Esto será un trigger a GitHub Action')">Abrir Caja</button>
+  <button onclick="dispararAccion()">Abrir Caja</button>
+
+  <script>
+    async function dispararAccion() {
+      const respuesta = await fetch("https://api.github.com/repos/TU_USUARIO/TU_REPO/actions/workflows/accion-caja.yml/dispatches", {
+        method: "POST",
+        headers: {
+          "Accept": "application/vnd.github+json",
+          "Authorization": "Bearer TU_TOKEN_PERSONAL",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          ref: "main"
+        })
+      });
+
+      if (respuesta.ok) {
+        alert("Acción enviada con éxito.");
+      } else {
+        const errorText = await respuesta.text();
+        console.error(errorText);
+        alert("Error al enviar la acción.");
+      }
+    }
+  </script>
 </body>
 </html>

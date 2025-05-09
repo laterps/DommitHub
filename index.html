@@ -9,11 +9,11 @@
 
   <script>
     async function dispararAccion() {
-      const respuesta = await fetch("https://api.github.com/repos/TU_USUARIO/TU_REPO/actions/workflows/accion-caja.yml/dispatches", {
+      const respuesta = await fetch("https://api.github.com/repos/laterps/DommitHub/actions/workflows/accion-caja.yml/dispatches", {
         method: "POST",
         headers: {
           "Accept": "application/vnd.github+json",
-          "Authorization": "Bearer TU_TOKEN_PERSONAL",
+          "Authorization": "Bearer DOMMITHUB_TOKEN",
           "Content-Type": "application/json"
         },
         body: JSON.stringify({

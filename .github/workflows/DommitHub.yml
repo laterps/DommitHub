@@ -1,0 +1,11 @@
+name: Abrir Caja
+
+on:
+  workflow_dispatch:
+
+jobs:
+  abrir-caja:
+    runs-on: Domotica
+    steps:
+      - name: Imprimir mensaje
+        run: echo "Simulando apertura de caja"

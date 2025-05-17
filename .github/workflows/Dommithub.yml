@@ -1,0 +1,43 @@
+name: Control serial on dispatch
+
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        description: 'Comando serial a enviar (1=ON, 0=OFF)'
+        required: true
+        default: '1'
+
+env:
+  PYTHON: C:\Windows\py.exe
+  SCRIPT: "D:\\4EE\\Serialdatapython\\Send_Serial_Data_Demon.py"
+  COM_PORT: COM8
+  BAUDRATE: 9600
+
+jobs:
+  Send-Command-To-Runner:
+    runs-on: Domotica
+    steps:
+      - name: Iniciar demonio si toca
+        if: ${{ contains( github.event.inputs.command, 'start' ) }}
+        shell: powershell
+        run: |
+          $msg = '${{ github.event.inputs.command }}'
+          & "${{ env.PYTHON }}" "${{ env.SCRIPT }}" send --message $msg --port ${{ env.COM_PORT }} --baudrate ${{ env.BAUDRATE }}
+
+      - name: Enviar mensaje si toca
+        if: ${{ github.event.inputs.command == '1' || github.event.inputs.command == '0' }}
+        shell: powershell
+        run: |
+          $msg = '${{ github.event.inputs.command }}'
+          Write-Host "→ Enviando: $msg"
+          & ${{ env.PYTHON }} ${{ env.SCRIPT }} send `
+            --message $msg `
+            --port ${{ env.COM_PORT }} `
+            --baudrate ${{ env.BAUDRATE }}
+
+      - name: Detener demonio si toca
+        if: ${{ contains( github.event.inputs.command, 'stop' ) }}
+        shell: powershell
+        run: |
+          & "${{ env.PYTHON }}" "${{ env.SCRIPT }}" stop

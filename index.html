@@ -4,7 +4,7 @@
   <title>Control de Caja</title>
 </head>
 <body>
- <button id="relay1-toggle">Encender Relay 1</button>
+ <button id="relay1-toggle">Encender Relay 10</button>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const command = isOn ? '0' : '1';
     button.textContent = 'Enviando...';
 
-    fetch('https://api.github.com/repos/laterps/dommithub/actions/workflows/Dommithub.yml/dispatches', {
+    fetch('https://api.github.com/repos/laterps/DommitHub/actions/workflows/Dommithub.yml/dispatches', {
       method: 'POST',
       headers: {
         'Accept': 'application/vnd.github.v3+json',

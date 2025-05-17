@@ -4,31 +4,45 @@
   <title>Control de Caja</title>
 </head>
 <body>
-  <h1>Automatización de Caja</h1>
-  <button onclick="dispararAccion()">Abrir Caja</button>
+ <button id="relay1-toggle">Encender Relay 1</button>
 
-  <script>
-    async function dispararAccion() {
-      const respuesta = await fetch("https://api.github.com/repos/laterps/DommitHub/actions/workflows/accion-caja.yml/dispatches", {
-        method: "POST",
-        headers: {
-          "Accept": "application/vnd.github+json",
-          "Authorization": "Bearer DOMMITHUB_TOKEN",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          ref: "main"
-        })
-      });
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const button = document.getElementById('relay1-toggle');
+  let isOn = false;  // Estado inicial: apagado
 
-      if (respuesta.ok) {
-        alert("Acción enviada con éxito.");
+  button.addEventListener('click', () => {
+    const command = isOn ? '0' : '1';
+    button.textContent = 'Enviando...';
+
+    fetch('https://api.github.com/repos/laterps/dommithub/actions/workflows/Dommithub.yml/dispatches', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer REEMPLAZA_AQUÍ_TU_DOMMITHUB_TOKEN'
+      },
+      body: JSON.stringify({
+        ref: 'main',
+        inputs: { command }
+      })
+    })
+    .then(response => {
+      if (response.ok) {
+        // Alterna el estado y el texto del botón
+        isOn = !isOn;
+        button.textContent = isOn
+          ? 'Apagar Relay 1'
+          : 'Encender Relay 1';
       } else {
-        const errorText = await respuesta.text();
-        console.error(errorText);
-        alert("Error al enviar la acción.");
+        button.textContent = 'Error al enviar';
       }
-    }
-  </script>
+    })
+    .catch(() => {
+      button.textContent = 'Error al enviar';
+    });
+  });
+});
+</script>
 </body>
 </html>

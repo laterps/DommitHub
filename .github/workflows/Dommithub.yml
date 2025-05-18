@@ -26,7 +26,7 @@ jobs:
           & "${{ env.PYTHON }}" "${{ env.SCRIPT }}" send --message $msg --port ${{ env.COM_PORT }} --baudrate ${{ env.BAUDRATE }}
 
       - name: Enviar mensaje si toca
-        if: ${{ github.event.inputs.command == '1' || github.event.inputs.command == '0' }}
+        if: ${{ github.event.inputs.command == '1' || github.event.inputs.command == '2' }}
         shell: powershell
         run: |
           $msg = '${{ github.event.inputs.command }}'

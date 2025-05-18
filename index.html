@@ -5,7 +5,7 @@
   <title>Control de Caja</title>
 </head>
 <body>
-  <button id="relay1-toggle">Encender Relay xfg1</button>
+  <button id="relay1-toggle">Encender Relay 1</button>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -16,36 +16,24 @@
         const command = isOn ? '0' : '1';
         button.textContent = 'Enviando...';
 
-        fetch('https://api.github.com/repos/laterps/DommitHub/actions/workflows/Dommithub.yml/dispatches', {
+        // Llamada al proxy en Netlify Functions
+        fetch('/.netlify/functions/dispatch', {
           method: 'POST',
-          headers: {
-            'Accept': 'application/vnd.github.v3+json',
-            'Content-Type': 'application/json',
-            'Authorization': 'token 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'
-          },
-          body: JSON.stringify({
-            ref: 'main',
-            inputs: { command }
-          })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ command })
         })
-        .then(async response => {
-          console.log('Status:', response.status);
-          let text;
-          try {
-            text = await response.json();
-          } catch {
-            text = await response.text();
-          }
-          console.error('Body:', text);
+        .then(async res => {
+          console.log('Proxy status:', res.status);
+          const text = await res.text();
+          console.log('Proxy body:', text);
 
-          if (response.ok) {
-            // Alterna el estado y el texto del botón
+          if (res.ok) {
             isOn = !isOn;
             button.textContent = isOn
               ? 'Apagar Relay 1'
               : 'Encender Relay 1';
           } else {
-            button.textContent = `Error ${response.status}`;
+            button.textContent = `Error ${res.status}`;
           }
         })
         .catch(err => {

@@ -1,29 +1,29 @@
 [
   {
     "id": "relay1",
-    "labelOff": "Encender Relay 1",
-    "labelOn":  "Apagar Relay 1",
+    "labelOff": "Encender Sala",
+    "labelOn":  "Apagar Sala",
     "commandOff": "2",
     "commandOn":  "1"
   },
   {
     "id": "relay2",
-    "labelOff": "Encender Relay 2",
-    "labelOn":  "Apagar Relay 2",
+    "labelOff": "Encender Iluminacion Exterior",
+    "labelOn":  "Apagar Iluminacion Exterior",
     "commandOff": "4",
     "commandOn":  "3"
   },
   {
     "id": "relay3",
-    "labelOff": "Encender Relay 3",
-    "labelOn":  "Apagar Relay 3",
+    "labelOff": "Encender Sistema de Riego",
+    "labelOn":  "Apagar Sistema de Riego",
     "commandOff": "6",
     "commandOn":  "5"
   },
   {
     "id": "relay4",
-    "labelOff": "Encender Relay 4",
-    "labelOn":  "Apagar Relay 4",
+    "labelOff": "Abrir Cochera",
+    "labelOn":  "Cerrar Cochera",
     "commandOff": "8",
     "commandOn":  "7"
   }

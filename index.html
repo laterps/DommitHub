@@ -3,45 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <title>Control de Caja</title>
+  <!-- <link rel="stylesheet" href="style.css" /> -->
 </head>
 <body>
-  <button id="relay1-toggle">Encender Relay 1</button>
+  <!-- Contenedor donde se montarán los toggles -->
+  <div id="controls"></div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const button = document.getElementById('relay1-toggle');
-      let isOn = false;  // Estado inicial: apagado
-
-      button.addEventListener('click', () => {
-        const command = isOn ? '2' : '1';
-        button.textContent = 'Enviando...';
-
-        // Llamada al proxy en Netlify Functions
-        fetch('/.netlify/functions/dispatch', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ command })
-        })
-        .then(async res => {
-          console.log('Proxy status:', res.status);
-          const text = await res.text();
-          console.log('Proxy body:', text);
-
-          if (res.ok) {
-            isOn = !isOn;
-            button.textContent = isOn
-              ? 'Apagar Relay 1'
-              : 'Encender Relay 1';
-          } else {
-            button.textContent = `Error ${res.status}`;
-          }
-        })
-        .catch(err => {
-          console.error('Fetch error:', err);
-          button.textContent = 'Error al enviar';
-        });
-      });
-    });
-  </script>
+  <!-- Script de generación dinámica de controles y dispatch genérico -->
+  <script src="script.js"></script>
 </body>
 </html>

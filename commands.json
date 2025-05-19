@@ -1,0 +1,30 @@
+[
+  {
+    "id": "relay1",
+    "labelOff": "Encender Relay 1",
+    "labelOn": "Apagar Relay 1",
+    "commandOff": "2",
+    "commandOn": "1"
+  }
+   {
+     "id": "relay2",
+     "labelOff": "Encender Relay 2",
+     "labelOn": "Apagar Relay 2",
+     "commandOff": "4",
+     "commandOn": "3"
+   }
+   {
+     "id": "relay2",
+     "labelOff": "Encender Relay 3",
+     "labelOn": "Apagar Relay 3",
+     "commandOff": "6",
+     "commandOn": "5"
+   }
+   {
+     "id": "relay2",
+     "labelOff": "Encender Relay 2",
+     "labelOn": "Apagar Relay 2",
+     "commandOff": "8",
+     "commandOn": "7"
+   }
+]

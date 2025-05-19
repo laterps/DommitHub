@@ -1,0 +1,54 @@
+.control {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.control input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.control label {
+  position: relative;
+  padding-left: 50px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.control label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 20px;
+  background: #ccc;
+  border-radius: 20px;
+  transition: background 0.2s;
+}
+
+.control label::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.control input:checked + label::before {
+  background: #4caf50;
+}
+
+.control input:checked + label::after {
+  transform: translateY(-50%) translateX(20px);
+}

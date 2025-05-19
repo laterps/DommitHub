@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         checkbox.id = `${cmd.id}-toggle`;
         checkbox.dataset.commandOn = cmd.commandOn;
         checkbox.dataset.commandOff = cmd.commandOff;
+        console.log(`↕️ Cambio en ${checkbox.id}, checked=`, checkbox.checked);
 
         // Crea label asociado
         const label = document.createElement('label');
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Cuando cambie el toggle, envía el comando
         checkbox.addEventListener('change', async () => {
+          console.log(`↕️ Cambio en ${checkbox.id}, checked=`, checkbox.checked);
           const isOn = checkbox.checked;
           const command = isOn
             ? checkbox.dataset.commandOn
